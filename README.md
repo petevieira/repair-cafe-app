@@ -69,25 +69,39 @@ Before setting up the application, ensure you have the following installed:
 
 ## Installation
 
+1. **Set Up Github SSH Keys:**
+
+   - See [instructions on Github](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) or elsewhere
+
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/yourusername/repair-cafe-app.git
+   git clone git@github.com:petevieira/repair-cafe-app.git
    cd repair-cafe-app
    ```
 
-2. **Install Dependencies:**
+1. **Update Submodules:**
+
+   ```bash
+   git submodule init
+   git submodule udpate
+   ```
+
+1. **Switch Node Version:**
+
+   1. Follow [instructions](https://github.com/nvm-sh/nvm) to install Node Version Manager (NVM)
+   1. Switch to Node v20.11.1
+      - ```bash
+        nvm use v20.11.1
+        ```
+
+3. **Install Dependencies:**
 
    Using npm:
 
    ```bash
-   npm install
-   ```
-
-   Or using yarn:
-
-   ```bash
-   yarn install
+   cd frontend && npm install
+   cd ../api ** npm install
    ```
 
 ---
@@ -100,14 +114,14 @@ Before setting up the application, ensure you have the following installed:
    - Log in to your MongoDB Atlas account.
    - Create a new cluster, selecting your preferred cloud provider and region.
 
-2. **Database User:**
+1. **Database User:**
    - Navigate to the "Database Access" section.
    - Add a new database user with a secure password.
 
-3. **Network Access:**
+1. **Network Access:**
    - In the "Network Access" section, add IP addresses that are permitted to access the database. For development purposes, you can allow access from all IPs (`0.0.0.0/0`), but it's recommended to restrict this in production environments.
 
-4. **Connection String:**
+1. **Connection String:**
    - Obtain the connection string from the "Clusters" section by clicking "Connect" and selecting "Connect your application."
    - Replace `<password>` with your database user's password.
 
