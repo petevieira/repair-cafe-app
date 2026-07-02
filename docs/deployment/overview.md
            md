@@ -1,0 +1,96 @@
+# Deployment overview
+
+This guide walks through deploying a production instance for your repair cafe. The recommended path uses **MongoDB Atlas** + **Render**, but the same configuration applies to other hosts.
+
+## Architecture recap
+
+You will deploy **three things**:
+
+1. **MongoDB database** (Atlas or self-hosted)
+2. **API server** (Node/Express)
+3. **Frontend static site** (Expo web build)
+
+```
+Users → https://your-cafe.example.org  (frontend static files)
+              │
+              └── API calls → https://your-api.onrender.com/api
+                                    │
+                                    └── MongoDB Atlas
+```
+
+## Pre-deployment checklist
+
+- [ ] MongoDB Atlas cluster created with a database user and network access configured
+- [ ] Strong `JWT_SECRET` generated (32+ random characters)
+- [ ] API `.env` values ready (or platform environment variables)
+- [ ] Frontend `API_URL` set to your **production** API URL (including `/api` suffix)
+- [ ] At least one **admin** user created in MongoDB
+- [ ] Custom domain DNS planned (optional)
+
+## Recommended deployment order
+
+| Step | Action | Doc |
+|------|--------|-----|
+| 1 | Create MongoDB cluster | [MongoDB Atlas](./mongodb-atlas.md) |
+| 2 | Deploy API | [Deploy the API](./deploy-api.md) |
+| 3 | Verify API health | `curl https://YOUR-API/api/` |
+| 4 | Create admin user | [First admin user](../operations/first-admin-user.md) |
+| 5 | Build and deploy frontend | [Deploy the frontend](./deploy-frontend.md) |
+| 6 | Log in and smoke-test | Create a test event, add a volunteer |
+
+## Environment summary
+
+### API (production)
+
+```env
+NODE_ENV=production
+PRODUCTION_DATABASE_CONNECTION_STRING=mongodb+srv://...
+JWT_SECRET=...
+JWT_EXPIRATION=6d
+JWT_ISSUER=your-cafe
+JWT_AUDIENCE=your-cafe
+COST_UNITS=usd
+WEIGHT_UNITS=lbs
+PORT=3000
+```
+
+Render sets `PORT` automatically — do not hard-code a public port.
+
+### Frontend (production build)
+
+```env
+API_URL=https://your-api-host.example.com/api
+COST_UNITS=usd
+WEIGHT_UNITS=lbs
+```
+
+Rebuild the frontend whenever `API_URL` changes — it is baked into the bundle at build time.
+
+## Deploy both services on every release
+
+The API and frontend are **separate git submodules** and **separate deployments**. If you fix a bug in the frontend, you must rebuild and redeploy the static site. API-only deploys do not update the web app.
+
+See [Updating a deployment](../operations/updating.md).
+
+## Hosting alternatives
+
+| Approach | API | Frontend | When to use |
+|----------|-----|----------|-------------|
+| Render (documented) | Web service | Static site | Easiest; free tier |
+| Docker | Container on any host | Static nginx or CDN | You already use containers |
+| VPS | PM2 + nginx reverse proxy | nginx static root | Full control, one server |
+
+Docker notes: `api/Dockerfile` exists but pins Node 16 — update the base image to Node 22 before production use, or run without Docker using `npm run start:prod`.
+
+## Security notes
+- Restrict MongoDB network access to known IPs when possible
+- Use HTTPS everywhere (Render provides this by default)
+- Never commit `.env` files to git
+- Rotate `JWT_SECRET` if compromised (invalidates all sessions)
+
+## Related pages
+
+- [MongoDB Atlas](./mongodb-atlas.md)
+- [Deploy the API](./deploy-api.md)
+- [Deploy the frontend](./deploy-frontend.md)
+- [Environment variables](./environment-variables.md)
