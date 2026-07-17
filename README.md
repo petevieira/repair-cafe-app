@@ -9,14 +9,14 @@ A web app for repair cafes to manage events, log repairs, and track volunteers. 
 ## Quick start (local)
 
 ```bash
-git clone git@github.com:petevieira/trc-app.git
-cd trc-app
+git clone git@github.com:petevieira/repair-cafe-app.git
+cd repair-cafe-app
 git submodule init && git submodule update
 
-# API (Node 22.14.0)
+# API
 cd api && cp env.default .env && npm install && npm run start:dev
 
-# Frontend (Node 20.11.1) — separate terminal
+# Frontend — separate terminal
 cd frontend && cp env.default .env && npm install && npm run web
 ```
 
@@ -26,11 +26,11 @@ See [Local development](./docs/getting-started/local-development.md) for environ
 
 ## Repository structure
 
-| Path | Description |
-|------|-------------|
-| `api/` | Node/Express REST API ([trc-api](https://github.com/petevieira/trc-api) submodule) |
-| `frontend/` | Expo web app ([trc-frontend](https://github.com/petevieira/trc-frontend) submodule) |
-| `docs/` | Deployment and operations guide |
+| Path        | Description                                                                                                 |
+| ----------- | ----------------------------------------------------------------------------------------------------------- |
+| `api/`      | Node/Express REST API ([repair-cafe-app-api](https://github.com/petevieira/repair-cafe-app-api) submodule)  |
+| `frontend/` | Expo web app ([repair-cafe-app-frontend](https://github.com/petevieira/repair-cafe-app-frontend) submodule) |
+| `docs/`     | Deployment and operations guide                                                                             |
 
 The API and frontend deploy as **separate services**. Update both when releasing changes that touch both codebases.
 
@@ -51,11 +51,11 @@ The API and frontend deploy as **separate services**. Update both when releasing
 
 Typical production stack:
 
-| Component | Suggested host |
-|-----------|----------------|
-| Database | [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) (free M0 tier) |
-| API | [Render](https://render.com) web service |
-| Frontend | Render static site (or any static host) |
+| Component | Suggested host                                                      |
+| --------- | ------------------------------------------------------------------- |
+| Database  | [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) (free M0 tier) |
+| API       | [Render](https://render.com) web service                            |
+| Frontend  | Render static site (or any static host)                             |
 
 Step-by-step instructions: **[Deployment overview](./docs/deployment/overview.md)**
 

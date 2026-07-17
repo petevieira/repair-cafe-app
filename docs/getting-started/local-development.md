@@ -5,16 +5,16 @@ Run the full stack on your machine before deploying to production.
 ## 1. Clone the repository
 
 ```bash
-git clone git@github.com:petevieira/trc-app.git
-cd trc-app
+git clone git@github.com:petevieira/repair-cafe-app.git
+cd repair-cafe-app
 git submodule init
 git submodule update
 ```
 
 If you use HTTPS instead of SSH, adjust the clone URL accordingly. Submodule URLs are defined in `.gitmodules`:
 
-- `api` → `trc-api`
-- `frontend` → `trc-frontend`
+- `api` → `repair-cafe-app-api`
+- `frontend` → `repair-cafe-app-frontend`
 
 ## 2. Set up MongoDB
 

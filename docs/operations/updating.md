@@ -5,9 +5,9 @@ The API and frontend are separate deployments. Update both when a release touche
 ## Repository layout reminder
 
 ```
-trc-app/          ← parent repo (docs, submodule pointers)
-├── api/          ← trc-api submodule
-└── frontend/     ← trc-frontend submodule
+repair-cafe-app/          ← parent repo (docs, submodule pointers)
+├── api/          ← repair-cafe-app-api submodule
+└── frontend/     ← repair-cafe-app-frontend submodule
 ```
 
 Changes may live in submodule repos. Push submodule commits first, then update the parent repo's submodule reference if you use it for deployment.
@@ -17,7 +17,7 @@ Changes may live in submodule repos. Push submodule commits first, then update t
 ### 1. Pull latest code
 
 ```bash
-cd trc-app
+cd repair-cafe-app
 git pull
 git submodule update --remote
 ```
@@ -76,13 +76,13 @@ npm run build:web
 
 ## When to update only one service
 
-| Change location | Redeploy |
-|-----------------|----------|
-| API controllers, models, routes | API only |
-| React components, requests, UI | Frontend only |
-| `API_URL` or frontend env vars | Frontend rebuild required |
-| Database connection or JWT settings | API only |
-| Both submodules in same feature | Both |
+| Change location                     | Redeploy                  |
+| ----------------------------------- | ------------------------- |
+| API controllers, models, routes     | API only                  |
+| React components, requests, UI      | Frontend only             |
+| `API_URL` or frontend env vars      | Frontend rebuild required |
+| Database connection or JWT settings | API only                  |
+| Both submodules in same feature     | Both                      |
 
 ## PM2 on Render
 
@@ -97,7 +97,7 @@ pm2 restart all
 If you deploy from the monorepo and only updated a submodule:
 
 ```bash
-cd trc-app
+cd repair-cafe-app
 cd api && git pull && cd ..
 git add api
 git commit -m "Update api submodule"

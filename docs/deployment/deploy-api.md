@@ -6,25 +6,25 @@ The API is a Node.js Express server. This page covers Render (recommended), Dock
 
 ### Connect the repository
 
-The API lives in the **`trc-api`** submodule. You can deploy either:
+The API lives in the **`repair-cafe-app-api`** submodule. You can deploy either:
 
-- The **`trc-api`** repository directly (simplest), or
-- The parent **`trc-app`** repo with root directory set to `api`
+- The **`repair-cafe-app-api`** repository directly (simplest), or
+- The parent **`repair-cafe-app`** repo with root directory set to `api`
 
 1. Log in to [Render](https://render.com)
 2. Click **New** → **Web Service**
 3. Connect your Git provider and select the API repository
 4. Configure the service:
 
-| Setting | Value |
-|---------|-------|
-| **Name** | e.g. `my-cafe-api` |
-| **Region** | Same region as MongoDB when possible |
-| **Branch** | `main` (or your production branch) |
-| **Root directory** | `api` (if deploying from monorepo) |
-| **Runtime** | Node |
-| **Build command** | `npm install` |
-| **Start command** | `npm run start:prod` |
+| Setting            | Value                                |
+| ------------------ | ------------------------------------ |
+| **Name**           | e.g. `my-cafe-api`                   |
+| **Region**         | Same region as MongoDB when possible |
+| **Branch**         | `main` (or your production branch)   |
+| **Root directory** | `api` (if deploying from monorepo)   |
+| **Runtime**        | Node                                 |
+| **Build command**  | `npm install`                        |
+| **Start command**  | `npm run start:prod`                 |
 
 <!-- SCREENSHOT: Render new web service settings -->
 
@@ -32,16 +32,16 @@ The API lives in the **`trc-api`** submodule. You can deploy either:
 
 In Render → your service → **Environment**, add:
 
-| Variable | Example |
-|----------|---------|
-| `NODE_ENV` | `production` |
+| Variable                                | Example             |
+| --------------------------------------- | ------------------- |
+| `NODE_ENV`                              | `production`        |
 | `PRODUCTION_DATABASE_CONNECTION_STRING` | `mongodb+srv://...` |
-| `JWT_SECRET` | long random string |
-| `JWT_EXPIRATION` | `6d` |
-| `JWT_ISSUER` | `my-repair-cafe` |
-| `JWT_AUDIENCE` | `my-repair-cafe` |
-| `COST_UNITS` | `usd` |
-| `WEIGHT_UNITS` | `lbs` |
+| `JWT_SECRET`                            | long random string  |
+| `JWT_EXPIRATION`                        | `6d`                |
+| `JWT_ISSUER`                            | `my-repair-cafe`    |
+| `JWT_AUDIENCE`                          | `my-repair-cafe`    |
+| `COST_UNITS`                            | `usd`               |
+| `WEIGHT_UNITS`                          | `lbs`               |
 
 Render injects `PORT` automatically — the server reads `process.env.PORT`.
 
@@ -83,8 +83,8 @@ Build and run locally:
 
 ```bash
 cd api
-docker build -t trc-api .
-docker run --interactive --tty --publish 3000:3000 --env-file .env trc-api
+docker build -t repair-cafe-app-api .
+docker run --interactive --tty --publish 3000:3000 --env-file .env repair-cafe-app-api
 ```
 
 For production:
@@ -98,12 +98,12 @@ For production:
 On a Linux server with Node 22 installed:
 
 ```bash
-cd /var/www/trc-api
+cd /var/www/repair-cafe-app-api
 git pull
 npm install
 ```
 
-Create `/etc/systemd/system/trc-api.service` or use PM2 directly:
+Create `/etc/systemd/system/repair-cafe-app-api.service` or use PM2 directly:
 
 ```bash
 NODE_ENV=production npm run start:prod
@@ -129,8 +129,8 @@ Use Let's Encrypt (certbot) for TLS certificates.
 
 ## Health check
 
-| Endpoint | Expected |
-|----------|----------|
+| Endpoint    | Expected             |
+| ----------- | -------------------- |
 | `GET /api/` | JSON success message |
 
 Swagger docs (`/docs`) are **disabled** when `NODE_ENV=production`.

@@ -43,13 +43,13 @@ Open the URL shown and confirm the login page loads and API calls reach your pro
 ## Render Static Site
 
 1. **New** → **Static Site**
-2. Connect the **`trc-frontend`** repo (or monorepo with root directory `frontend`)
+2. Connect the **`repair-cafe-app-frontend`** repo (or monorepo with root directory `frontend`)
 3. Configure:
 
-| Setting | Value |
-|---------|-------|
-| **Build command** | `npm install && npm run build:web` |
-| **Publish directory** | `dist` |
+| Setting               | Value                              |
+| --------------------- | ---------------------------------- |
+| **Build command**     | `npm install && npm run build:web` |
+| **Publish directory** | `dist`                             |
 
 4. Add **environment variables** in Render (same as `.env` above) — Render injects them during the build
 5. Deploy
@@ -62,11 +62,11 @@ In Render → Static Site → **Settings** → **Custom Domains**, add e.g. `app
 
 ## Other static hosts
 
-| Host | Publish directory | Notes |
-|------|-------------------|-------|
-| **Netlify** | `dist` | Set env vars in Netlify UI; build cmd `npm run build:web` |
-| **Cloudflare Pages** | `dist` | Add `API_URL` as build env var |
-| **nginx** | copy `dist/*` to `/var/www/html` | Simple; manage TLS with certbot |
+| Host                 | Publish directory                | Notes                                                     |
+| -------------------- | -------------------------------- | --------------------------------------------------------- |
+| **Netlify**          | `dist`                           | Set env vars in Netlify UI; build cmd `npm run build:web` |
+| **Cloudflare Pages** | `dist`                           | Add `API_URL` as build env var                            |
+| **nginx**            | copy `dist/*` to `/var/www/html` | Simple; manage TLS with certbot                           |
 
 Example nginx config for SPA routing (Expo web uses client-side routing):
 
@@ -74,7 +74,7 @@ Example nginx config for SPA routing (Expo web uses client-side routing):
 server {
     listen 443 ssl;
     server_name app.your-cafe.org;
-    root /var/www/trc-frontend/dist;
+    root /var/www/repair-cafe-app-frontend/dist;
     index index.html;
 
     location / {

@@ -1,6 +1,6 @@
 [submodule "api"]
 	path = api
-	url = git@github.com-petevieira:petevieira/trc-api.git
+	url = git@github.com-petevieira:petevieira/repair-cafe-app-api.git
 [submodule "frontend"]
 	path = frontend
-	url = git@github.com-petevieira:petevieira/trc-frontend.git
+	url = git@github.com-petevieira:petevieira/repair-cafe-app-frontend.git
