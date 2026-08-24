@@ -8,7 +8,7 @@ The Repair Cafe Management App has three main parts:
 │   (Expo web)    │  ◄────────────────────  │   (Node/Express)│
 └─────────────────┘                         └────────┬────────┘
                                                      │
-                                                     │ MongoDB driver
+                                             MongoDB │ driver
                                                      ▼
                                             ┌─────────────────┐
                                             │  MongoDB Atlas  │
@@ -44,11 +44,11 @@ The Repair Cafe Management App has three main parts:
 
 ## Deployment model
 
-| Service | Typical host | Notes |
-|---------|--------------|-------|
-| API | Render web service, VPS, or Docker | Must expose HTTPS; set `PORT` if host provides it |
-| Frontend | Render static site, Netlify, S3+CloudFront, nginx | Static files from `build:web` |
-| Database | MongoDB Atlas | Allow API server IP (or `0.0.0.0/0` for cloud hosts) |
+| Service  | Typical host                                      | Notes                                                |
+| -------- | ------------------------------------------------- | ---------------------------------------------------- |
+| API      | Render web service, VPS, or Docker                | Must expose HTTPS; set `PORT` if host provides it    |
+| Frontend | Render static site, Netlify, S3+CloudFront, nginx | Static files from `build:web`                        |
+| Database | MongoDB Atlas                                     | Allow API server IP (or `0.0.0.0/0` for cloud hosts) |
 
 **Important:** The API and frontend deploy independently. Pushing API changes does not update the frontend bundle, and vice versa. See [Updating a deployment](../operations/updating.md).
 
@@ -56,11 +56,11 @@ The Repair Cafe Management App has three main parts:
 
 Users stored in MongoDB have a `role` field:
 
-| Role | Can sign in? | Typical use |
-|------|--------------|-------------|
-| `admin` | Yes | Full access — manage events, repairs, volunteers |
-| `volunteer` | Yes | Repair-day access |
-| `user` | No | Reserved; not used for app login today. Can see latest event's repair list. |
+| Role        | Can sign in? | Typical use                                                                 |
+| ----------- | ------------ | --------------------------------------------------------------------------- |
+| `admin`     | Yes          | Full access — manage events, repairs, volunteers                            |
+| `volunteer` | Yes          | Repair-day access                                                           |
+| `user`      | No           | Reserved; not used for app login today. Can see latest event's repair list. |
 
 Admin and volunteer accounts are created manually in the database — there is no public sign-up flow. See [First admin user](../operations/first-admin-user.md).
 
