@@ -2,6 +2,10 @@
 
 Welcome to the deployment and operations guide for the Repair Cafe Management App. This documentation is written for repair cafe organizers who want to run their own instance on their own servers and database.
 
+# Authors
+
+We at Tucson Repair Cafe created these docs after creating a tracker app for our own events. Now it's open-source and hopefully these docs are detailed enough to get the app going for your events. If not, please reach out to app maintainer Pete Vieira (pete.vieira at gmail).
+
 ## Quick links
 
 | Goal                                 | Start here                                                     |
@@ -42,15 +46,6 @@ Welcome to the deployment and operations guide for the Repair Cafe Management Ap
 ### Customization
 
 - [Branding and units](./customization/branding-and-units.md) — currency, weight units, and app identity
-
-## Screenshots
-
-Several pages include `<!-- SCREENSHOT: ... -->` placeholders where you can add images later. Suggested captures:
-
-1. MongoDB Atlas — cluster creation, database user, network access, connection string
-2. Render — new web service, environment variables, deploy logs
-3. Frontend static site — build output and publish settings
-4. App login screen and admin dashboard after first deploy
 
 ## Repository structure
 
