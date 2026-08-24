@@ -11,10 +11,17 @@
   <body>
     <div id="app">Loading…</div>
     <script>
+      const basePath = (() => {
+        let path = window.location.pathname.replace(/index\.html$/, "");
+        if (!path.endsWith("/")) path += "/";
+        return path;
+      })();
+
       window.$docsify = {
         name: "Repair Cafe Management App",
         repo: "petevieira/repair-cafe-app",
         homepage: "README.md",
+        basePath,
         relativePath: true,
         loadSidebar: "sidebar.md",
         auto2top: true,
